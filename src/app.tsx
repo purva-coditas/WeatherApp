@@ -1,9 +1,16 @@
-import React from 'react';
-import ReactDOM from 'react-dom';
-import './App.scss';
+import React from "react";
+import ReactDOM from "react-dom";
+import "./App.scss";
+import Daycard from "./component/DayCard";
+import Homescreen from "./component/homescreen";
 
 const App = () => {
-  return <h1>Weather Forecast</h1>;
+  return (
+    <div>
+      <h1>Weather Forecast</h1>
+      <Homescreen />
+    </div>
+  );
 };
 
-ReactDOM.render(<App />, document.getElementById('root'));
+ReactDOM.render(<App />, document.getElementById("root"));

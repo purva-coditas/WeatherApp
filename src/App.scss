@@ -1,3 +1,6 @@
-* {
-  color: green;
+@import "../node_modules/bootstrap/scss/bootstrap";
+@import "../src/component/card.scss";
+
+body {
+  // margin: 40px;
 }
