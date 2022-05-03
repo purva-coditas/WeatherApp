@@ -1,15 +1,27 @@
 .daysummary {
   text-align: center;
-  width: 50px;
-  margin-top: 10px;
-  // position: relative;
-  background-color: #3c16c5;
-  color: rgb(23, 23, 199);
+  width: 40px;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
   border-radius: 12px;
   padding: 1rem;
   box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
-  background-color: aqua;
   border-color: black;
+}
+
+.timesummary {
+  text-align: center;
+  width: 30px;
+  height: 90px;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 50px;
+  padding: 1rem;
+  box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
+}
+
+.letterheads {
+  color: white;
 }
 
 .homecard {
