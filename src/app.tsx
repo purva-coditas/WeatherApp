@@ -7,7 +7,7 @@ import Homescreen from "./component/homescreen";
 const App = () => {
   return (
     <div>
-      <h1>Weather Forecast</h1>
+      <h1 style={{ color: "green" }}>Weather Forecast</h1>
       <Homescreen />
     </div>
   );

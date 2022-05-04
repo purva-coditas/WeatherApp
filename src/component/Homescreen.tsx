@@ -58,7 +58,7 @@ const Homescreen = () => {
         <div style={{ marginLeft: "20px" }}>
           <img src="" />
           <input
-            style={{ borderRadius: "10px" }}
+            style={{ opacity: "90%", marginLeft: "30px" }}
             type="text"
             placeholder="Search"
           />
@@ -72,9 +72,15 @@ const Homescreen = () => {
             flexDirection: "row",
           }}
         >
-          <SunriseCard />
-          <GoldenHours />
-          <Sunset />
+          <span style={{ marginTop: "20px" }}>
+            <SunriseCard />
+          </span>
+          <span>
+            <GoldenHours />
+          </span>
+          <span style={{ marginTop: "20px" }}>
+            <Sunset />
+          </span>
         </div>
       </div>
     </div>
