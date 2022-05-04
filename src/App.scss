@@ -1,4 +1,98 @@
+@import './component/OneCallDaily.scss';
 body {
   text-align: center;
   margin: 10px;
+  color: white;
 }
+
+.main-div {
+  height: 650px;
+  width: 1400px;
+  display: flex;
+  text-align: left;
+}
+
+.left-side {
+  width: 60%;
+  height: 570px;
+  padding: 40px;
+  background: #eeb3cd; /* fallback for old browsers */
+  background: -webkit-linear-gradient(
+    to bottom left,
+    #aa81b7,
+    #eeb3cd
+  ); /* Chrome 10-25, Safari 5.1-6 */
+  background: linear-gradient(to bottom left, #aa81b7, #eeb3cd);
+}
+
+.right-side {
+  width: 40%;
+  height: 570px;
+  padding: 40px;
+  background: #a384bc;
+  background: -webkit-linear-gradient(to bottom right, #cbb2d4, #a384bc);
+  background: linear-gradient(to bottom right, #cbb2d4, #a384bc);
+}
+
+.temp {
+  font-size: 150px;
+  font-weight: 200;
+  margin: 0;
+  .celcius {
+    font-size: 50px;
+    position: absolute;
+    top: 170px;
+  }
+}
+
+.current-date {
+  font-size: 40px;
+  margin: 0px;
+}
+
+.day-time {
+  font-size: 18px;
+  margin: 5px 0 30px 0;
+  .day {
+    padding-right: 10px;
+    border-right: 1px solid white;
+  }
+  .time {
+    padding-left: 10px;
+  }
+}
+
+.other-data {
+  font-size: 15px;
+  margin: 5px 0 30px 0;
+  .wind {
+    padding-right: 20px;
+    border-right: 1px solid white;
+  }
+  .humidity {
+    padding: 0 20px;
+    border-right: 1px solid white;
+  }
+  .weather {
+    padding-left: 20px;
+  }
+}
+
+.daysummary {
+  text-align: center;
+  width: 40px;
+  margin: 10px;
+  background-color: rgba(255, 255, 255, 0.2);
+  border-radius: 12px;
+  padding: 1rem;
+  box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
+  border-color: black;
+}
+
+// color 1   #eeb3cd  rgba(237,179,205,255)
+// color 2  #c998c1  rgba(201,152,193,255)
+// color 3  #ac82b8  rgba(172,130,184,255)
+
+// uv index #8557e8 rgba(133,87,232,255)
+
+// sunrise #cbb5d6 rgba(203,181,214,255)

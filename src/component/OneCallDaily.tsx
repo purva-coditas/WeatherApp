@@ -1,14 +1,22 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import AirQuality from './AirQuality';
+import Slider from 'react-slick';
 import { api } from './api';
+import DayCard from './DayCard';
 import { PropType, SingleDay } from './WeatherProps';
 
 const OneCallDaily = ({ lat, lon, call_uvi }: PropType) => {
   const [Daily, setDaily] = useState([]);
   const [Current, setCurrent] = useState<SingleDay>();
-  const Weekdays = ['Sun', 'Mon', 'Tue', 'Wed', 'Thu', 'Fri', 'Sat'];
+
+  const settings = {
+    dots: false,
+    infinite: false,
+    speed: 500,
+    slidesToShow: 4,
+    slidesToScroll: 1,
+  };
 
   useEffect(() => {
     axios
@@ -26,36 +34,12 @@ const OneCallDaily = ({ lat, lon, call_uvi }: PropType) => {
 
   return (
     <>
-      <div style={{ display: 'flex' }}>
-        {Daily &&
-          Daily.map((day: any) => (
-            <div
-              key={day.dt}
-              style={{
-                width: '100px',
-                height: '100px',
-                border: '1px solid black',
-                margin: '10px',
-                padding: '10px',
-              }}
-            >
-              <span style={{ margin: 'none' }}>
-                {Math.round(day.temp.day)}&#176;C
-              </span>
-              <br />
-              <img
-                src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
-                alt="Weather Icon"
-              />
-              <br />
-              <span>{Weekdays[new Date(day.dt * 1000).getDay()]}</span>
-            </div>
-          ))}
+      <div className="weekly">
+        <Slider {...settings}>
+          {Daily && Daily.map((day: any) => <DayCard key={day.dt} day={day} />)}
+        </Slider>
       </div>
-      <div>
-        {/* <p>Rain:{Current && Current.rain['1hr']}</p> */}
-        {/* {Current && <AirQuality lat={lat} lon={lon} uvi={Current.uvi} />} */}
-      </div>
+      <div>{/* <p>Rain:{Current && Current.rain['1hr']}</p> */}</div>
     </>
   );
 };

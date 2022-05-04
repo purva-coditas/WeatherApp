@@ -2,38 +2,21 @@ import axios from 'axios';
 import React, { useState } from 'react';
 import AirQuality from './AirQuality';
 import { api } from './api';
+import { formatOrdinals, WeekdaysFull } from './DateFormattor';
 import OneCallDaily from './OneCallDaily';
 import SunTime from './SunTime';
 import { WeatherProps } from './WeatherProps';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import {
+  faLocationArrow,
+  faDroplet,
+  faCloudRain,
+} from '@fortawesome/free-solid-svg-icons';
 
 const GrabData: React.FC = () => {
   const [query, setQuery] = useState('');
   const [uvi, setUvi] = useState(0);
   const [weather, setWeather] = useState<WeatherProps>();
-
-  const Weekdays = [
-    'Sunday',
-    'Monday',
-    'Tuesday',
-    'Wednesday',
-    'Thursday',
-    'Friday',
-    'Saturday',
-  ];
-
-  const formatOrdinals = (n: number) => {
-    var pr = new Intl.PluralRules('en-US', { type: 'ordinal' });
-
-    const suffixes = new Map([
-      ['one', 'st'],
-      ['two', 'nd'],
-      ['few', 'rd'],
-      ['other', 'th'],
-    ]);
-    const rule = pr.select(n);
-    const suffix = suffixes.get(rule);
-    return `${n}${suffix}`;
-  };
 
   let rise = weather && weather.sys.sunrise;
   let set = weather && weather.sys.sunset;
@@ -58,81 +41,71 @@ const GrabData: React.FC = () => {
   }
 
   return (
-    <div
-      style={{
-        height: '650px',
-        width: '1400px',
-        display: 'flex',
-      }}
-    >
-      <div
-        style={{
-          width: '60%',
-          height: '570px',
-          backgroundColor: 'pink',
-          padding: '40px',
-        }}
-      >
-        <div>
-          {weather && (
-            <div style={{ textAlign: 'left' }}>
-              <img
-                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
-                alt="Weather Icon"
-                height={80}
-                width={130}
-              />
-              <p style={{ fontSize: '200px', margin: '0' }}>
-                {Math.round(weather.main.temp)}
-                <sup
-                  style={{
-                    fontSize: '50px',
-                    position: 'absolute',
-                    top: '170px',
-                  }}
-                >
-                  &#176;C
-                </sup>
-              </p>
-              <p>
-                {formatOrdinals(new Date(weather.dt * 1000).getDate())}{' '}
-                {new Date(weather.dt * 1000).toLocaleDateString('en-GB', {
-                  month: 'short',
-                  year: '2-digit',
-                })}
-              </p>
-              <p>
-                {Weekdays[new Date(weather.dt * 1000).getDay()]} |
+    <div className="main-div">
+      <div className="left-side">
+        {weather && (
+          <div>
+            <img
+              src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+              alt="Weather Icon"
+              height={80}
+              width={130}
+            />
+            <p className="temp">
+              {Math.round(weather.main.temp)}
+              <sup className="celcius">&#176;C</sup>
+            </p>
+            <p className="current-date">
+              {formatOrdinals(new Date(weather.dt * 1000).getDate())}{' '}
+              {new Date(weather.dt * 1000).toLocaleDateString('en-GB', {
+                month: 'short',
+              })}{' '}
+              &apos;
+              {new Date(weather.dt * 1000).toLocaleDateString('en-GB', {
+                year: '2-digit',
+              })}
+            </p>
+            <p className="day-time">
+              <span className="day">
+                {WeekdaysFull[new Date(weather.dt * 1000).getDay()]}
+              </span>
+
+              <span className="time">
                 {new Date(weather.dt * 1000).toLocaleTimeString('en-US', {
                   hour: '2-digit',
                   minute: '2-digit',
                 })}
-              </p>
-              <span>Wind: {weather.wind.speed}km/h</span> |
-              <span>Humidity: {weather.main.humidity}%</span> |
-              <span>{weather.weather[0].main}</span>
-            </div>
-          )}
+              </span>
+            </p>
+            <p className="other-data">
+              <span className="wind">
+                <FontAwesomeIcon
+                  icon={faLocationArrow}
+                  transform={{ rotate: 40 }}
+                  size="lg"
+                />
+                &nbsp; &nbsp; Wind &nbsp;&nbsp; {weather.wind.speed}&nbsp;km/h
+              </span>
+              <span className="humidity">
+                <FontAwesomeIcon icon={faDroplet} size="lg" />
+                &nbsp; &nbsp; Hum &nbsp;&nbsp;{weather.main.humidity}&nbsp;%
+              </span>
+              <span className="weather">
+                <FontAwesomeIcon icon={faCloudRain} size="lg" />
+                &nbsp; &nbsp; Rain &nbsp;&nbsp;
+                {weather.weather[0].main}&nbsp;%
+              </span>
+            </p>
+          </div>
+        )}
 
-          <>
-            {weather && (
-              <OneCallDaily
-                lat={coord.lat}
-                lon={coord.lon}
-                call_uvi={call_uvi}
-              />
-            )}
-          </>
-        </div>
+        <>
+          {weather && (
+            <OneCallDaily lat={coord.lat} lon={coord.lon} call_uvi={call_uvi} />
+          )}
+        </>
       </div>
-      <div
-        style={{
-          width: '40%',
-          backgroundColor: 'purple',
-          height: '570px',
-          padding: '40px',
-        }}
-      >
+      <div className="right-side">
         <div>
           <input
             type="text"
