@@ -120,7 +120,7 @@ const GrabData: React.FC = () => {
             {weather.name},{weather.sys.country}
           </h2>
         )}
-        <div>{weather && <SunTime rise={rise} set={set} />}</div>
+        <>{weather && <SunTime rise={rise} set={set} />}</>
         <div>
           {weather && <AirQuality lat={coord.lat} lon={coord.lon} uvi={uvi} />}
         </div>

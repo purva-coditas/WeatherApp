@@ -3,6 +3,7 @@ import React from 'react';
 import { useEffect, useState } from 'react';
 import { api } from './api';
 import { AirProps, AirPropType } from './WeatherProps';
+// import Progress from 'react-circle-progress-bar'
 
 const AirQuality = ({ lat, lon, uvi }: AirPropType) => {
   const [AirIndex, setAirIndex] = useState<AirProps>();
@@ -18,11 +19,20 @@ const AirQuality = ({ lat, lon, uvi }: AirPropType) => {
 
   return (
     <>
-      <p>
-        Air Quality:
-        {AirIndex && AirIndex.list[0].main.aqi}| UV Index:
-        {uvi}
-      </p>
+      <div style={{ display: 'flex' }}>
+        <div>
+          <p>
+            Air Quality
+            <div>{AirIndex && AirIndex.list[0].main.aqi}</div>
+          </p>
+        </div>
+        <div>
+          <p>
+            UV Index
+            <div>{uvi}</div>
+          </p>
+        </div>
+      </div>
     </>
   );
 };
