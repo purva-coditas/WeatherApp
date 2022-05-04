@@ -45,7 +45,6 @@ const Homescreen = () => {
           </div>
           <div>
             <Daycard />
-            ""
           </div>
           <div>
             <Daycard />
@@ -54,11 +53,15 @@ const Homescreen = () => {
       </div>
 
       <div style={{ width: "400px", height: "400px" }}>
-        sunrise
         <div style={{ marginLeft: "20px" }}>
           <img src="" />
           <input
-            style={{ opacity: "90%", marginLeft: "30px" }}
+            style={{
+              borderColor: "white",
+              backgroundColor: "rgba(255,255,255,0.2)",
+              marginLeft: "30px",
+              borderRadius: "10px",
+            }}
             type="text"
             placeholder="Search"
           />
@@ -82,6 +85,7 @@ const Homescreen = () => {
             <Sunset />
           </span>
         </div>
+        <div style={{ width: "1000px", backgroundColor: "white" }}>here</div>
       </div>
     </div>
   );
