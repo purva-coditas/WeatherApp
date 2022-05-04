@@ -61,6 +61,7 @@ const Homescreen = () => {
               backgroundColor: "rgba(255,255,255,0.2)",
               marginLeft: "30px",
               borderRadius: "10px",
+              width: "250px",
             }}
             type="text"
             placeholder="Search"
