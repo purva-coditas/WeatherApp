@@ -11,10 +11,13 @@ import {
   faLocationArrow,
   faDroplet,
   faCloudRain,
+  faCloud,
 } from '@fortawesome/free-solid-svg-icons';
+import Switch from './Switch';
 
 const GrabData: React.FC = () => {
   const [query, setQuery] = useState('');
+  const [toggled, setToggled] = useState(false);
   const [uvi, setUvi] = useState(0);
   const [weather, setWeather] = useState<WeatherProps>();
 
@@ -45,16 +48,38 @@ const GrabData: React.FC = () => {
       <div className="left-side">
         {weather && (
           <div>
-            <img
-              src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
-              alt="Weather Icon"
-              height={80}
-              width={130}
-            />
-            <p className="temp">
-              {Math.round(weather.main.temp)}
-              <sup className="celcius">&#176;C</sup>
-            </p>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+              <img
+                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+                alt="Weather Icon"
+                height={80}
+                width={130}
+              />
+              <span className="toggle-switch">
+                <Switch
+                  id="temp"
+                  label=""
+                  data-on="F"
+                  data-off="C"
+                  isChecked={toggled}
+                  onChange={setToggled}
+                />
+              </span>
+            </div>
+
+            {toggled && (
+              <p className="temp">
+                {Math.round(weather.main.temp)}{' '}
+                <sup className="celcius">&#176;C</sup>
+              </p>
+            )}
+            {!toggled && (
+              <p className="temp">
+                {Math.round(weather.main.temp * 1.8 + 32)}
+                <sup className="celcius">&#176;F</sup>
+              </p>
+            )}
+
             <p className="current-date">
               {formatOrdinals(new Date(weather.dt * 1000).getDate())}{' '}
               {new Date(weather.dt * 1000).toLocaleDateString('en-GB', {
@@ -91,9 +116,9 @@ const GrabData: React.FC = () => {
                 &nbsp; &nbsp; Hum &nbsp;&nbsp;{weather.main.humidity}&nbsp;%
               </span>
               <span className="weather">
-                <FontAwesomeIcon icon={faCloudRain} size="lg" />
-                &nbsp; &nbsp; Rain &nbsp;&nbsp;
-                {weather.weather[0].main}&nbsp;%
+                <FontAwesomeIcon icon={faCloud} size="lg" />
+                &nbsp; &nbsp; Weather &nbsp;&nbsp;
+                {weather.weather[0].main}&nbsp;
               </span>
             </p>
           </div>

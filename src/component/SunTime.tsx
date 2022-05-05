@@ -22,6 +22,7 @@ const SunTime = ({ rise, set }: SunProps) => {
             size={60}
             renderHourMarks={false}
             renderMinuteMarks={false}
+            hourHandWidth={2}
           />
           <div style={{ marginTop: '25px' }}>
             {new Date(rise * 1000).toLocaleTimeString('en-US', {
@@ -49,6 +50,7 @@ const SunTime = ({ rise, set }: SunProps) => {
             size={80}
             renderHourMarks={false}
             renderMinuteMarks={false}
+            hourHandWidth={2}
           />
           <div style={{ marginTop: '25px' }}>
             {new Date(rise * 1000).toLocaleTimeString('en-US', {
@@ -76,6 +78,7 @@ const SunTime = ({ rise, set }: SunProps) => {
             size={60}
             renderHourMarks={false}
             renderMinuteMarks={false}
+            hourHandWidth={2}
           />
           <div style={{ marginTop: '25px' }}>
             {new Date(set * 1000).toLocaleTimeString('en-US', {

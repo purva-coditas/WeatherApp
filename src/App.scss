@@ -1,5 +1,7 @@
 @import './component/OneCallDaily.scss';
 @import './component/SunTime.scss';
+@import './component/AirQuality.scss';
+@import './component/Switch.scss';
 body {
   text-align: center;
   margin: 10px;
@@ -14,7 +16,7 @@ body {
 }
 
 .left-side {
-  width: 60%;
+  width: 55%;
   height: 570px;
   padding: 40px;
   background: #eeb3cd; /* fallback for old browsers */
@@ -27,7 +29,7 @@ body {
 }
 
 .right-side {
-  width: 40%;
+  width: 45%;
   height: 570px;
   padding: 40px;
   background: #a384bc;
