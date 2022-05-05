@@ -12,6 +12,8 @@ import {
   faDroplet,
   faCloudRain,
   faCloud,
+  faLocationDot,
+  faMagnifyingGlass,
 } from '@fortawesome/free-solid-svg-icons';
 import Switch from './Switch';
 
@@ -133,16 +135,20 @@ const GrabData: React.FC = () => {
       <div className="right-side">
         <div>
           <input
+            className="search-bar"
             type="text"
-            placeholder="Search.."
             onChange={(e) => setQuery(e.target.value)}
             value={query}
           />
-          <button onClick={handleSearch}>Search</button>
+          <button className="search-btn" onClick={handleSearch}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} size="sm" />
+          </button>
         </div>
         {weather && (
           <h2>
-            {weather.name},{weather.sys.country}
+            <FontAwesomeIcon icon={faLocationDot} size="sm" />
+            &nbsp; &nbsp;
+            {weather.name},&nbsp;{weather.sys.country}
           </h2>
         )}
         <>{weather && <SunTime rise={rise} set={set} />}</>

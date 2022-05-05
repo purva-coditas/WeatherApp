@@ -58,7 +58,7 @@ const SunTime = ({ rise, set }: SunProps) => {
               minute: '2-digit',
             })}{' '}
             <small>
-              {new Date(rise * 1000).toLocaleTimeString('en-US', {
+              {new Date(set * 1000).toLocaleTimeString('en-US', {
                 hour: '2-digit',
                 minute: '2-digit',
               })}
