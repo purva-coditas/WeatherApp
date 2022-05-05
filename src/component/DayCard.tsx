@@ -1,20 +1,24 @@
+import { Weekdays } from "./DateFormattor";
 import React from "react";
-// import cloud from '../../public/assests/download.png';
+interface DayProp {
+  day: any;
+}
 
-const Daycard = () => {
+const DayCard = ({ day }: DayProp) => {
   return (
-    <div>
-      <div className="daysummary ">
-        <span>24 C</span>
-        <br></br>
-        <img
-          style={{ width: "50px", height: "50px" }}
-          src="../../public/assests/download.png"
-        />
-        <span>Fri</span>
-      </div>
-         </div>
+    <div key={day.dt} className="daily">
+      <span>{Math.round(day.temp.day)}&#176;C</span>
+      <br />
+      <img
+        src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
+        height={50}
+        width={50}
+        alt="Weather Icon"
+      />
+      <br />
+      <span>{Weekdays[new Date(day.dt * 1000).getDay()]}</span>
+    </div>
   );
 };
 
-export default Daycard;
+export default DayCard;

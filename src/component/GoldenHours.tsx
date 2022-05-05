@@ -1,5 +1,4 @@
 import React from "react";
-// import cloud from '../../public/assests/download.png';
 
 const GoldenHours = () => {
   const currentDateTime = new Date();

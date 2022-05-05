@@ -1,16 +1,18 @@
 import React from "react";
-import ReactDOM from "react-dom";
+import ReactDOM from "react-dom/client";
 import "./App.scss";
-import Daycard from "./component/DayCard";
-import Homescreen from "./component/homescreen";
+import GrabData from "./component/GrabData";
+import "slick-carousel/slick/slick.css";
+import "slick-carousel/slick/slick-theme.css";
 
 const App = () => {
   return (
-    <div>
-      <h1 style={{ color: "green" }}>Weather Forecast</h1>
-      <Homescreen />
-    </div>
+    <>
+      {/* <h1>Weather Forecast</h1> */}
+      <GrabData />
+    </>
   );
 };
 
-ReactDOM.render(<App />, document.getElementById("root"));
+const root = ReactDOM.createRoot(document.getElementById("root"));
+root.render(<App />);
