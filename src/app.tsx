@@ -10,7 +10,9 @@ const App = () => {
   return (
     <>
       {/* <h1>Weather Forecast</h1> */}
+      <h1>{process.env.API_URL}</h1>
       <GrabData />
+      {/* <ProgressCircle now={30} label="30" size="small" /> */}
     </>
   );
 };
