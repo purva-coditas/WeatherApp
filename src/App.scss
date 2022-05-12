@@ -1,6 +1,13 @@
 // @import "../node_modules/bootstrap/scss/bootstrap";
 @import "../src/component/card.scss";
 @import "./component/OneCallDaily.scss";
+@import "./component/Progressbar.scss";
+
+@media screen and (min-width: 800px) {
+  .container {
+    margin: 1em 2em;
+  }
+}
 body {
   text-align: center;
   margin: 10px;
@@ -8,15 +15,16 @@ body {
 }
 
 .main-div {
-  height: 650px;
-  width: 1400px;
+  // height: 650px;
+  // width: 1400px;
   display: flex;
   text-align: left;
+  max-width: 100%;
 }
 
 .left-side {
-  width: 60%;
-  height: 570px;
+  // width: 60%;
+  // height: 570px;
   padding: 40px;
   background: #eeb3cd; /* fallback for old browsers */
   background: -webkit-linear-gradient(
@@ -89,6 +97,10 @@ body {
   padding: 1rem;
   box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
   border-color: black;
+}
+textarea:focus,
+input:focus {
+  outline: none;
 }
 
 // color 1   #eeb3cd  rgba(237,179,205,255)

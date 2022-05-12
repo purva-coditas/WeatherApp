@@ -1,5 +1,5 @@
 import axios from "axios";
-import React, { useState } from "react";
+import React, { useState, useEffect } from "react";
 import AirQuality from "./AirQuality";
 import { api } from "./api";
 import { formatOrdinals, WeekdaysFull } from "./DateFormattor";
@@ -18,6 +18,26 @@ const GrabData: React.FC = () => {
   const [uvi, setUvi] = useState(0);
   const [weather, setWeather] = useState<WeatherProps>();
 
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        console.log(position);
+        axios
+          .get(
+            `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude={part}&appid=f6f175a9fac96aaf769836337fbc65e5`
+          )
+          .then((currentLocation) => {
+            console.log("here", currentLocation);
+            // setWeather(currentLocation);
+          });
+      },
+
+      function (error) {
+        console.error("Error Code = " + error.code + " - " + error.message);
+      }
+    );
+  }, []);
+
   let rise = weather && weather.sys.sunrise;
   let set = weather && weather.sys.sunset;
   let coord = weather && weather.coord;
@@ -26,7 +46,7 @@ const GrabData: React.FC = () => {
     axios
       .get(`${api.base}weather?q=${cityName}&units=metric&APPID=${api.key}`)
       .then((result) => {
-        setQuery("");
+        // setQuery("");
         setWeather(result.data);
         console.log(result);
       });
@@ -41,7 +61,7 @@ const GrabData: React.FC = () => {
   }
 
   return (
-    <div className="main-div">
+    <div className="main-div container">
       <div className="left-side">
         {weather && (
           <div>
@@ -111,15 +131,24 @@ const GrabData: React.FC = () => {
             type="text"
             placeholder="Search.."
             onChange={(e) => setQuery(e.target.value)}
+            onKeyPress={(e) => {
+              if (e.key === "Enter") {
+                handleSearch();
+              }
+            }}
+            // onKeyDown={(e) => {
+            //   e.key === "Enter" ? { handleSearch } : null;
+            // }}
             value={query}
             style={{
+              color: "white",
               borderColor: "white",
               backgroundColor: "rgba(255,255,255,0.2)",
               borderRadius: "10px",
               width: "250px",
             }}
           />
-          <button onClick={handleSearch}>Search</button>
+          {/* <button onClick={handleSearch}>Search</button> */}
         </div>
         {weather && (
           <h2>
