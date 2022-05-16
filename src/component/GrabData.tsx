@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React, { useState } from 'react';
 import AirQuality from './AirQuality';
-import { api } from './api';
+// import { api } from './api';
 import { formatOrdinals, WeekdaysFull } from './DateFormattor';
 import OneCallDaily from './OneCallDaily';
 import SunTime from './SunTime';
@@ -29,7 +29,9 @@ const GrabData: React.FC = () => {
 
   const getData = (cityName: string) => {
     axios
-      .get(`${api.base}weather?q=${cityName}&units=metric&APPID=${api.key}`)
+      .get(
+        `${process.env.API_URL}weather?q=${cityName}&units=metric&APPID=${process.env.key}`
+      )
       .then((result) => {
         setQuery('');
         setWeather(result.data);

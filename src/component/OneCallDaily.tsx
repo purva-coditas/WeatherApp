@@ -2,7 +2,7 @@ import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-import { api } from './api';
+// import { api } from './api';
 import DayCard from './DayCard';
 import { PropType, SingleDay } from './WeatherProps';
 
@@ -21,7 +21,7 @@ const OneCallDaily = ({ lat, lon, call_uvi }: PropType) => {
   useEffect(() => {
     axios
       .get(
-        `${api.base}onecall?lat=${lat}&lon=${lon}&exclude=hourly,alerts,minutely&units=metric&APPID=${api.key}`
+        `${process.env.API_URL}onecall?lat=${lat}&lon=${lon}&exclude=hourly,alerts,minutely&units=metric&APPID=${process.env.key}`
       )
       .then((result) => {
         console.log(result.data);

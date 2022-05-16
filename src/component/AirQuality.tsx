@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { api } from './api';
+// import { api } from './api';
 import { AirProps, AirPropType } from './WeatherProps';
 // import Progress from 'react-circle-progress-bar'
 
@@ -54,7 +54,9 @@ const AirQuality = ({ lat, lon, uvi }: AirPropType) => {
 
   useEffect(() => {
     axios
-      .get(`${api.base}air_pollution?lat=${lat}&lon=${lon}&appid=${api.key}`)
+      .get(
+        `${process.env.API_URL}air_pollution?lat=${lat}&lon=${lon}&appid=${process.env.key}`
+      )
       .then((result) => {
         console.log(result.data);
         setAirIndex(result.data);

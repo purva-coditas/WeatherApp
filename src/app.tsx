@@ -7,12 +7,12 @@ import 'slick-carousel/slick/slick-theme.css';
 import 'react-clock/dist/Clock.css';
 
 const App = () => {
+  // console.log('foo: ', p.p); // foo: bar
+  console.log('API URL: ', process.env.API_URL);
+  console.log('API URL: ', process.env.key);
   return (
     <>
-      {/* <h1>Weather Forecast</h1> */}
-      <h1>{process.env.API_URL}</h1>
       <GrabData />
-      {/* <ProgressCircle now={30} label="30" size="small" /> */}
     </>
   );
 };

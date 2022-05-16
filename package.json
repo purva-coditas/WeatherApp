@@ -5,8 +5,9 @@
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "webpack --watch",
-    "dev-server": "webpack-dev-server"
+    "build": "webpack --watch --mode=production",
+    "dev-server": "webpack-dev-server",
+    "start": "webpack-dev-server --mode=development"
   },
   "author": "",
   "license": "ISC",
@@ -27,6 +28,7 @@
     "babel-loader": "^8.2.5",
     "css-loader": "^6.7.1",
     "d3": "^7.4.4",
+    "live-server": "^1.2.2",
     "react": "^18.1.0",
     "react-circle-progress-bar": "^0.1.4",
     "react-clock": "^3.1.0",
