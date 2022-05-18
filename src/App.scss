@@ -1,76 +1,25 @@
-// @import "../node_modules/bootstrap/scss/bootstrap";
-@import "../src/component/card.scss";
 @import "./component/OneCallDaily.scss";
-@import "./component/Progressbar.scss";
-
-@media screen and (min-width: 800px) {
-  .container {
-    margin: 1em 2em;
-  }
-}
+@import "./component/SunTime.scss";
+@import "./component/AirQuality.scss";
+@import "./component/Switch.scss";
+@import "./component/GrabData.scss";
 body {
   text-align: center;
   margin: 10px;
   color: white;
 }
-
-.main-div {
-  // height: 650px;
-  // width: 1400px;
-  display: flex;
-  text-align: left;
-  max-width: 100%;
-}
-
-.left-side {
-  // width: 60%;
-  // height: 570px;
-  padding: 40px;
-  background: #eeb3cd; /* fallback for old browsers */
-  background: -webkit-linear-gradient(
-    to bottom left,
-    #aa81b7,
-    #eeb3cd
-  ); /* Chrome 10-25, Safari 5.1-6 */
-  background: linear-gradient(to bottom left, #aa81b7, #eeb3cd);
-}
-
-.right-side {
-  width: 40%;
-  height: 570px;
-  padding: 40px;
-  background: #a384bc;
-  background: -webkit-linear-gradient(to bottom right, #cbb2d4, #a384bc);
-  background: linear-gradient(to bottom right, #cbb2d4, #a384bc);
-}
-
-.temp {
-  font-size: 150px;
-  font-weight: 200;
-  margin: 0;
-  .celcius {
-    font-size: 50px;
-    position: absolute;
-    top: 170px;
-  }
-}
-
-.current-date {
-  font-size: 40px;
-  margin: 0px;
-}
-
-.day-time {
-  font-size: 18px;
-  margin: 5px 0 30px 0;
-  .day {
-    padding-right: 10px;
-    border-right: 1px solid white;
-  }
-  .time {
-    padding-left: 10px;
-  }
-}
+// @media screen and (max-width: 1086px) {
+//   body {
+//     display: block;
+//   }
+// }
+// .main-div {
+//   // height: 650px;
+//   // width: 1400px;
+//   display: flex;
+//   text-align: left;
+//   max-width: 100%;
+// }
 
 .other-data {
   font-size: 15px;
@@ -97,10 +46,6 @@ body {
   padding: 1rem;
   box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
   border-color: black;
-}
-textarea:focus,
-input:focus {
-  outline: none;
 }
 
 // color 1   #eeb3cd  rgba(237,179,205,255)

@@ -7,14 +7,21 @@ import OneCallDaily from "./OneCallDaily";
 import SunTime from "./SunTime";
 import { WeatherProps } from "./WeatherProps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faLocationArrow,
   faDroplet,
   faCloudRain,
+  faCloud,
+  faLocationDot,
+  faMagnifyingGlass,
 } from "@fortawesome/free-solid-svg-icons";
+import Switch from "./Switch";
 
 const GrabData: React.FC = () => {
+  const [searchbarDisplay, setSearchDisplay] = useState(false);
   const [query, setQuery] = useState("");
+  const [toggled, setToggled] = useState(false);
   const [uvi, setUvi] = useState(0);
   const [weather, setWeather] = useState<WeatherProps>();
 
@@ -24,11 +31,11 @@ const GrabData: React.FC = () => {
         console.log(position);
         axios
           .get(
-            `https://api.openweathermap.org/data/2.5/onecall?lat=${position.coords.latitude}&lon=${position.coords.longitude}&exclude={part}&appid=f6f175a9fac96aaf769836337fbc65e5`
+            `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${api.key}`
           )
           .then((currentLocation) => {
-            console.log("here", currentLocation);
-            // setWeather(currentLocation);
+            console.log("here", currentLocation.data);
+            setWeather(currentLocation.data);
           });
       },
 
@@ -46,14 +53,15 @@ const GrabData: React.FC = () => {
     axios
       .get(`${api.base}weather?q=${cityName}&units=metric&APPID=${api.key}`)
       .then((result) => {
-        // setQuery("");
         setWeather(result.data);
-        console.log(result);
+        console.log("2nd", result.data);
       });
   };
 
   const handleSearch = () => {
+    setSearchDisplay(!searchbarDisplay);
     getData(query);
+    setQuery("");
   };
 
   function call_uvi(data: number) {
@@ -65,16 +73,38 @@ const GrabData: React.FC = () => {
       <div className="left-side">
         {weather && (
           <div>
-            <img
-              src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
-              alt="Weather Icon"
-              height={80}
-              width={130}
-            />
-            <p className="temp">
-              {Math.round(weather.main.temp)}
-              <sup className="celcius">&#176;C</sup>
-            </p>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
+              <img
+                src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
+                alt="Weather Icon"
+                height={80}
+                width={130}
+              />
+              <span className="toggle-switch">
+                <Switch
+                  id="temp"
+                  label=""
+                  data-on="F"
+                  data-off="C"
+                  isChecked={toggled}
+                  onChange={setToggled}
+                />
+              </span>
+            </div>
+
+            {toggled && (
+              <p className="temp">
+                {Math.round(weather.main.temp)}{" "}
+                <sup className="celcius">&#176;C</sup>
+              </p>
+            )}
+            {!toggled && (
+              <p className="temp">
+                {Math.round(weather.main.temp * 1.8 + 32)}
+                <sup className="celcius">&#176;F</sup>
+              </p>
+            )}
+
             <p className="current-date">
               {formatOrdinals(new Date(weather.dt * 1000).getDate())}{" "}
               {new Date(weather.dt * 1000).toLocaleDateString("en-GB", {
@@ -111,9 +141,9 @@ const GrabData: React.FC = () => {
                 &nbsp; &nbsp; Hum &nbsp;&nbsp;{weather.main.humidity}&nbsp;%
               </span>
               <span className="weather">
-                <FontAwesomeIcon icon={faCloudRain} size="lg" />
-                &nbsp; &nbsp; Rain &nbsp;&nbsp;
-                {weather.weather[0].main}&nbsp;%
+                <FontAwesomeIcon icon={faCloud} size="lg" />
+                &nbsp; &nbsp; Weather &nbsp;&nbsp;
+                {weather.weather[0].main}&nbsp;
               </span>
             </p>
           </div>
@@ -127,35 +157,34 @@ const GrabData: React.FC = () => {
       </div>
       <div className="right-side">
         <div>
-          <input
-            type="text"
-            placeholder="Search.."
-            onChange={(e) => setQuery(e.target.value)}
-            onKeyPress={(e) => {
-              if (e.key === "Enter") {
-                handleSearch();
-              }
-            }}
-            // onKeyDown={(e) => {
-            //   e.key === "Enter" ? { handleSearch } : null;
-            // }}
-            value={query}
-            style={{
-              color: "white",
-              borderColor: "white",
-              backgroundColor: "rgba(255,255,255,0.2)",
-              borderRadius: "10px",
-              width: "250px",
-            }}
-          />
-          {/* <button onClick={handleSearch}>Search</button> */}
+          {searchbarDisplay ? (
+            <input
+              className="search-bar"
+              type="text"
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
+              value={query}
+            ></input>
+          ) : (
+            weather && (
+              <span className="current-Location">
+                <FontAwesomeIcon icon={faLocationDot} size="sm" />
+                &nbsp; &nbsp;
+                {weather.name},&nbsp;{weather.sys.country}
+              </span>
+            )
+          )}
+
+          <button className="search-btn" onClick={handleSearch}>
+            <FontAwesomeIcon icon={faMagnifyingGlass} size="sm" />
+          </button>
         </div>
-        {weather && (
-          <h2>
-            {weather.name},{weather.sys.country}
-          </h2>
-        )}
-        <div>{weather && <SunTime rise={rise} set={set} />}</div>
+
+        <>{weather && <SunTime rise={rise} set={set} />}</>
         <div>
           {weather && <AirQuality lat={coord.lat} lon={coord.lon} uvi={uvi} />}
         </div>

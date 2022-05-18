@@ -6,7 +6,7 @@ const GoldenHours = () => {
   return (
     <div>
       <span>GoldenHours</span>
-      <div className="timesummary">
+      <div className="golden">
         <span style={{ fontSize: "10px" }}>{timeText}</span>
       </div>
     </div>

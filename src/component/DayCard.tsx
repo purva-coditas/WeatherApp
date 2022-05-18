@@ -8,6 +8,7 @@ const DayCard = ({ day }: DayProp) => {
   return (
     <div key={day.dt} className="daily">
       <span>{Math.round(day.temp.day)}&#176;C</span>
+      &nbsp;
       <br />
       <img
         src={`http://openweathermap.org/img/wn/${day.weather[0].icon}.png`}
@@ -15,7 +16,7 @@ const DayCard = ({ day }: DayProp) => {
         width={50}
         alt="Weather Icon"
       />
-      <br />
+      &nbsp;
       <span>{Weekdays[new Date(day.dt * 1000).getDay()]}</span>
     </div>
   );
