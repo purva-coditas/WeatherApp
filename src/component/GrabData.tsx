@@ -1,12 +1,12 @@
-import axios from 'axios';
-import React, { useState } from 'react';
-import AirQuality from './AirQuality';
-// import { api } from './api';
-import { formatOrdinals, WeekdaysFull } from './DateFormattor';
-import OneCallDaily from './OneCallDaily';
-import SunTime from './SunTime';
-import { WeatherProps } from './WeatherProps';
-import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
+import axios from "axios";
+import React, { useState, useEffect } from "react";
+import AirQuality from "./AirQuality";
+import { formatOrdinals, WeekdaysFull } from "./DateFormattor";
+import OneCallDaily from "./OneCallDaily";
+import SunTime from "./SunTime";
+import { WeatherProps } from "./WeatherProps";
+import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+
 import {
   faLocationArrow,
   faDroplet,
@@ -14,14 +14,35 @@ import {
   faCloud,
   faLocationDot,
   faMagnifyingGlass,
-} from '@fortawesome/free-solid-svg-icons';
-import Switch from './Switch';
+} from "@fortawesome/free-solid-svg-icons";
+import Switch from "./Switch";
 
 const GrabData: React.FC = () => {
-  const [query, setQuery] = useState('');
+  const [searchbarDisplay, setSearchDisplay] = useState(false);
+  const [query, setQuery] = useState("");
   const [toggled, setToggled] = useState(false);
   const [uvi, setUvi] = useState(0);
   const [weather, setWeather] = useState<WeatherProps>();
+
+  useEffect(() => {
+    navigator.geolocation.getCurrentPosition(
+      function (position) {
+        console.log(position);
+        axios
+          .get(
+            `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.key}`
+          )
+          .then((currentLocation) => {
+            console.log("here", currentLocation.data);
+            setWeather(currentLocation.data);
+          });
+      },
+
+      function (error) {
+        console.error("Error Code = " + error.code + " - " + error.message);
+      }
+    );
+  }, []);
 
   let rise = weather && weather.sys.sunrise;
   let set = weather && weather.sys.sunset;
@@ -33,14 +54,15 @@ const GrabData: React.FC = () => {
         `${process.env.API_URL}weather?q=${cityName}&units=metric&APPID=${process.env.key}`
       )
       .then((result) => {
-        setQuery('');
         setWeather(result.data);
-        console.log(result);
+        console.log("2nd", result.data);
       });
   };
 
   const handleSearch = () => {
+    setSearchDisplay(!searchbarDisplay);
     getData(query);
+    setQuery("");
   };
 
   function call_uvi(data: number) {
@@ -48,11 +70,11 @@ const GrabData: React.FC = () => {
   }
 
   return (
-    <div className="main-div">
+    <div className="main-div container">
       <div className="left-side">
         {weather && (
           <div>
-            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
+            <div style={{ display: "flex", justifyContent: "space-between" }}>
               <img
                 src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
                 alt="Weather Icon"
@@ -73,7 +95,7 @@ const GrabData: React.FC = () => {
 
             {toggled && (
               <p className="temp">
-                {Math.round(weather.main.temp)}{' '}
+                {Math.round(weather.main.temp)}{" "}
                 <sup className="celcius">&#176;C</sup>
               </p>
             )}
@@ -85,13 +107,13 @@ const GrabData: React.FC = () => {
             )}
 
             <p className="current-date">
-              {formatOrdinals(new Date(weather.dt * 1000).getDate())}{' '}
-              {new Date(weather.dt * 1000).toLocaleDateString('en-GB', {
-                month: 'short',
-              })}{' '}
+              {formatOrdinals(new Date(weather.dt * 1000).getDate())}{" "}
+              {new Date(weather.dt * 1000).toLocaleDateString("en-GB", {
+                month: "short",
+              })}{" "}
               &apos;
-              {new Date(weather.dt * 1000).toLocaleDateString('en-GB', {
-                year: '2-digit',
+              {new Date(weather.dt * 1000).toLocaleDateString("en-GB", {
+                year: "2-digit",
               })}
             </p>
             <p className="day-time">
@@ -100,9 +122,9 @@ const GrabData: React.FC = () => {
               </span>
 
               <span className="time">
-                {new Date(weather.dt * 1000).toLocaleTimeString('en-US', {
-                  hour: '2-digit',
-                  minute: '2-digit',
+                {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
+                  hour: "2-digit",
+                  minute: "2-digit",
                 })}
               </span>
             </p>
@@ -136,23 +158,33 @@ const GrabData: React.FC = () => {
       </div>
       <div className="right-side">
         <div>
-          <input
-            className="search-bar"
-            type="text"
-            onChange={(e) => setQuery(e.target.value)}
-            value={query}
-          />
+          {searchbarDisplay ? (
+            <input
+              className="search-bar"
+              type="text"
+              onChange={(e) => setQuery(e.target.value)}
+              onKeyPress={(e) => {
+                if (e.key === "Enter") {
+                  handleSearch();
+                }
+              }}
+              value={query}
+            ></input>
+          ) : (
+            weather && (
+              <span className="current-Location">
+                <FontAwesomeIcon icon={faLocationDot} size="sm" />
+                &nbsp; &nbsp;
+                {weather.name},&nbsp;{weather.sys.country}
+              </span>
+            )
+          )}
+
           <button className="search-btn" onClick={handleSearch}>
             <FontAwesomeIcon icon={faMagnifyingGlass} size="sm" />
           </button>
         </div>
-        {weather && (
-          <h2>
-            <FontAwesomeIcon icon={faLocationDot} size="sm" />
-            &nbsp; &nbsp;
-            {weather.name},&nbsp;{weather.sys.country}
-          </h2>
-        )}
+
         <>{weather && <SunTime rise={rise} set={set} />}</>
         <div>
           {weather && <AirQuality lat={coord.lat} lon={coord.lon} uvi={uvi} />}

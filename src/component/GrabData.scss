@@ -18,10 +18,15 @@
   background: linear-gradient(to bottom left, #aa81b7, #eeb3cd);
 }
 
+// .right-side {
+//   width: 45%;
+//   height: 580px;
+//   padding: 35px;
+// }
 .right-side {
-  width: 45%;
-  height: 580px;
-  padding: 35px;
+  width: 40%;
+  height: 570px;
+  padding: 40px;
   background: #a384bc;
   background: -webkit-linear-gradient(to bottom right, #cbb2d4, #a384bc);
   // background: linear-gradient(to bottom right, );
@@ -86,22 +91,46 @@
 .search-btn {
   background-color: rgba(255, 255, 255, 0.2);
   outline: none;
+  height: 40.5px;
   border: none;
   color: white;
   font-size: 20px;
   padding: 10px 15px;
+  vertical-align: middle;
   border-radius: 10px;
   margin-left: 10px;
 }
 
+.current-Location {
+  font-size: 22px;
+  font-family: sans-serif;
+  margin: 5px;
+  width: 270px;
+  display: inline-block;
+}
 .search-bar {
-  background-color: transparent;
+  font-size: 22px;
+  font-family: sans-serif;
+  background-color: rgba(255, 255, 255, 0.2);
   border: none;
-  width: 80%;
-  height: 30px;
-  border-radius: 20px;
-  padding: 5px;
+  width: 250px;
+  height: 20px;
+  border-radius: 10px;
+  color: white;
+  border-color: white;
+  padding: 10px;
+  vertical-align: middle;
   &:focus {
     border: none;
+    outline: none;
+  }
+}
+
+@media screen and (max-width: 900px) {
+  .main-div {
+    display: block;
+  }
+  .right-side {
+    width: 55%;
   }
 }
