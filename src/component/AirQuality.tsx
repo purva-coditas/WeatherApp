@@ -1,7 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
-import { api } from './api';
+// import { api } from './api';
 import { AirProps, AirPropType } from './WeatherProps';
 // import Progress from 'react-circle-progress-bar'
 
@@ -54,7 +54,9 @@ const AirQuality = ({ lat, lon, uvi }: AirPropType) => {
 
   useEffect(() => {
     axios
-      .get(`${api.base}air_pollution?lat=${lat}&lon=${lon}&appid=${api.key}`)
+      .get(
+        `${process.env.API_URL}air_pollution?lat=${lat}&lon=${lon}&appid=${process.env.key}`
+      )
       .then((result) => {
         console.log(result.data);
         setAirIndex(result.data);
@@ -66,13 +68,19 @@ const AirQuality = ({ lat, lon, uvi }: AirPropType) => {
       <div style={{ display: 'flex' }}>
         <div className="air">
           <p>Air Quality</p>
-          <div>{AirIndex && AirIndex.list[0].main.aqi}/5</div>
-          <div>{airQualityIndex(AirIndex && AirIndex.list[0].main.aqi)}</div>
+          <div className="half-circle border-gradient border-gradient-purple">
+            <div className="top-margin">
+              {AirIndex && AirIndex.list[0].main.aqi}/5
+            </div>
+            <div>{airQualityIndex(AirIndex && AirIndex.list[0].main.aqi)}</div>
+          </div>
         </div>
         <div className="uvindex">
           <p>UV Index</p>
-          <div>{uvi}/15</div>
-          <div>{uvIndex(uvi)}</div>
+          <div className="half-circle">
+            <div className="top-margin">{Math.round(uvi)}/15</div>
+            <div>{uvIndex(uvi)}</div>
+          </div>
         </div>
       </div>
     </>
