@@ -26,23 +26,6 @@ export interface WeatherProps {
   ];
 }
 
-// export interface WeeklyProps {
-//   list: [
-//     {
-//       dt_txt: string;
-//       dt: string;
-//       main: {
-//         temp: number;
-//       };
-//       weather: [
-//         {
-//           icon: string;
-//         }
-//       ];
-//     }
-//   ];
-// }
-
 export interface SingleDay {
   dt: number;
   humidity: number;
@@ -62,14 +45,6 @@ export interface SingleDay {
     }
   ];
 }
-
-// export interface OneCallProps {
-//   current: SingleDay;
-//   daily: SingleDay[];
-//   lat: number;
-//   lon: number;
-//   timezone: string;
-// }
 
 export interface PropType {
   lat: number;

@@ -1,9 +1,7 @@
 import axios from 'axios';
 import React from 'react';
 import { useEffect, useState } from 'react';
-// import { api } from './api';
 import { AirProps, AirPropType } from './WeatherProps';
-// import Progress from 'react-circle-progress-bar'
 
 const AirQuality = ({ lat, lon, uvi }: AirPropType) => {
   const [AirIndex, setAirIndex] = useState<AirProps>();
@@ -73,6 +71,7 @@ const AirQuality = ({ lat, lon, uvi }: AirPropType) => {
               {AirIndex && AirIndex.list[0].main.aqi}/5
             </div>
             <div>{airQualityIndex(AirIndex && AirIndex.list[0].main.aqi)}</div>
+            <span id="circle"></span>
           </div>
         </div>
         <div className="uvindex">
@@ -80,6 +79,7 @@ const AirQuality = ({ lat, lon, uvi }: AirPropType) => {
           <div className="half-circle">
             <div className="top-margin">{Math.round(uvi)}/15</div>
             <div>{uvIndex(uvi)}</div>
+            <span id="circle"></span>
           </div>
         </div>
       </div>

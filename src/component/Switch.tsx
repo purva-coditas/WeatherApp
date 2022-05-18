@@ -1,7 +1,5 @@
 import React from 'react';
 
-import './Switch.scss';
-
 interface SwitchProperties {
   id: string;
 

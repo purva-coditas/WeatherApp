@@ -1,8 +1,6 @@
 import axios from 'axios';
-import React from 'react';
 import { useEffect, useState } from 'react';
 import Slider from 'react-slick';
-// import { api } from './api';
 import DayCard from './DayCard';
 import { PropType, SingleDay } from './WeatherProps';
 
