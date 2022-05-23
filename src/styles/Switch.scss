@@ -5,7 +5,7 @@
 
   input {
     appearance: none;
-    min-width: 60px;
+    min-width: 65px;
     min-height: 30px;
     margin: 0;
 
@@ -31,6 +31,8 @@
         content: attr(data-on);
         left: 0.4em;
         right: unset;
+        position: absolute;
+        z-index: 1;
       }
     }
 
@@ -46,6 +48,7 @@
       transition: all 0.3s;
       border-radius: 50%;
       cursor: pointer;
+      // opacity: 0.5;
       // z-index: 1;
     }
 
@@ -59,6 +62,7 @@
       top: 0.5em;
       right: 0.4em;
       bottom: 0.5em;
+      z-index: 1;
     }
 
     &:focus {

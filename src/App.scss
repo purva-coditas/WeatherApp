@@ -1,25 +1,13 @@
-@import "./component/OneCallDaily.scss";
-@import "./component/SunTime.scss";
-@import "./component/AirQuality.scss";
-@import "./component/Switch.scss";
-@import "./component/GrabData.scss";
+@import './styles/OneCallDaily.scss';
+@import './styles/SunTime.scss';
+@import './styles/AirQuality.scss';
+@import './styles/Switch.scss';
+@import './styles/GrabData.scss';
 body {
   text-align: center;
   margin: 10px;
   color: white;
 }
-// @media screen and (max-width: 1086px) {
-//   body {
-//     display: block;
-//   }
-// }
-// .main-div {
-//   // height: 650px;
-//   // width: 1400px;
-//   display: flex;
-//   text-align: left;
-//   max-width: 100%;
-// }
 
 .other-data {
   font-size: 15px;
@@ -47,11 +35,3 @@ body {
   box-shadow: 0 1px 18px 10px rgba(0, 0, 0, 0.25);
   border-color: black;
 }
-
-// color 1   #eeb3cd  rgba(237,179,205,255)
-// color 2  #c998c1  rgba(201,152,193,255)
-// color 3  #ac82b8  rgba(172,130,184,255)
-
-// uv index #8557e8 rgba(133,87,232,255)
-
-// sunrise #cbb5d6 rgba(203,181,214,255)

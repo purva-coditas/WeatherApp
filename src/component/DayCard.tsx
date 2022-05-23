@@ -1,5 +1,4 @@
-import { Weekdays } from "./DateFormattor";
-import React from "react";
+import { Weekdays } from './DateFormattor';
 interface DayProp {
   day: any;
   toggled: boolean;

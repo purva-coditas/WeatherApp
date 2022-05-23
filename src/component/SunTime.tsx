@@ -1,4 +1,3 @@
-import React from "react";
 import { SunProps } from "./WeatherProps";
 import Clock from "react-clock";
 
