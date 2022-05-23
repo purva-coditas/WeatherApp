@@ -52,7 +52,7 @@ export interface SingleDay {
   temp: number;
   uvi: number;
   rain: {
-    '1hr': number;
+    "1hr": number;
   };
   wind_speed: number;
   weather: [
@@ -75,6 +75,7 @@ export interface PropType {
   lat: number;
   lon: number;
   call_uvi: (data: number) => void;
+  toggled: boolean;
 }
 export interface AirProps {
   list: [

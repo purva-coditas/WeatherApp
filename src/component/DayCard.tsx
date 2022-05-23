@@ -2,12 +2,19 @@ import { Weekdays } from "./DateFormattor";
 import React from "react";
 interface DayProp {
   day: any;
+  toggled: boolean;
 }
 
-const DayCard = ({ day }: DayProp) => {
+const DayCard = ({ day, toggled }: DayProp) => {
   return (
     <div key={day.dt} className="daily">
-      <span>{Math.round(day.temp.day)}&#176;C</span>
+      {toggled && <span>{Math.round(day.temp.day)} &#176;C</span>}
+      {!toggled && (
+        <span>
+          {Math.round(day.temp.day * 1.8 + 32)}
+          &#176;F
+        </span>
+      )}
       &nbsp;
       <br />
       <img

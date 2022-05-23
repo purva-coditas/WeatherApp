@@ -6,7 +6,7 @@ import OneCallDaily from "./OneCallDaily";
 import SunTime from "./SunTime";
 import { WeatherProps } from "./WeatherProps";
 import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
-
+// import { infoIcon } from "../../public/assests/i";
 import {
   faLocationArrow,
   faDroplet,
@@ -14,11 +14,13 @@ import {
   faCloud,
   faLocationDot,
   faMagnifyingGlass,
+  faInfo,
 } from "@fortawesome/free-solid-svg-icons";
 import Switch from "./Switch";
 
 const GrabData: React.FC = () => {
   const [searchbarDisplay, setSearchDisplay] = useState(false);
+  const [current, setCurrent] = useState(false);
   const [query, setQuery] = useState("");
   const [toggled, setToggled] = useState(false);
   const [uvi, setUvi] = useState(0);
@@ -30,10 +32,11 @@ const GrabData: React.FC = () => {
         console.log(position);
         axios
           .get(
-            `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.key}`
+            `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.key}&units=metric`
           )
           .then((currentLocation) => {
             console.log("here", currentLocation.data);
+            setCurrent(true);
             setWeather(currentLocation.data);
           });
       },
@@ -54,6 +57,7 @@ const GrabData: React.FC = () => {
         `${process.env.API_URL}weather?q=${cityName}&units=metric&APPID=${process.env.key}`
       )
       .then((result) => {
+        setCurrent(false);
         setWeather(result.data);
         console.log("2nd", result.data);
       });
@@ -152,7 +156,12 @@ const GrabData: React.FC = () => {
 
         <>
           {weather && (
-            <OneCallDaily lat={coord.lat} lon={coord.lon} call_uvi={call_uvi} />
+            <OneCallDaily
+              lat={coord.lat}
+              lon={coord.lon}
+              call_uvi={call_uvi}
+              toggled={toggled}
+            />
           )}
         </>
       </div>
@@ -186,6 +195,26 @@ const GrabData: React.FC = () => {
         </div>
 
         <>{weather && <SunTime rise={rise} set={set} />}</>
+        <div style={{ display: "flex" }}>
+          <div
+            style={{ borderBottom: "1px solid white", width: "270px" }}
+          ></div>
+
+          <div
+            style={{
+              padding: "4px 12px 8px 12px",
+              borderRadius: "50%",
+              backgroundColor: "rgba(255, 255, 255, 0.2)",
+            }}
+          >
+            <FontAwesomeIcon
+              icon={faInfo}
+              size="sm"
+              style={{ verticalAlign: "middle" }}
+            />
+          </div>
+        </div>
+
         <div>
           {weather && <AirQuality lat={coord.lat} lon={coord.lon} uvi={uvi} />}
         </div>

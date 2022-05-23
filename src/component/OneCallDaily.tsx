@@ -1,12 +1,12 @@
-import axios from 'axios';
-import React from 'react';
-import { useEffect, useState } from 'react';
-import Slider from 'react-slick';
+import axios from "axios";
+import React from "react";
+import { useEffect, useState } from "react";
+import Slider from "react-slick";
 // import { api } from './api';
-import DayCard from './DayCard';
-import { PropType, SingleDay } from './WeatherProps';
+import DayCard from "./DayCard";
+import { PropType, SingleDay } from "./WeatherProps";
 
-const OneCallDaily = ({ lat, lon, call_uvi }: PropType) => {
+const OneCallDaily = ({ lat, lon, call_uvi, toggled }: PropType) => {
   const [Daily, setDaily] = useState([]);
   const [Current, setCurrent] = useState<SingleDay>();
 
@@ -36,7 +36,10 @@ const OneCallDaily = ({ lat, lon, call_uvi }: PropType) => {
     <>
       <div className="weekly">
         <Slider {...settings}>
-          {Daily && Daily.map((day: any) => <DayCard key={day.dt} day={day} />)}
+          {Daily &&
+            Daily.map((day: any) => (
+              <DayCard key={day.dt} day={day} toggled={toggled} />
+            ))}
         </Slider>
       </div>
       <div>{/* <p>Rain:{Current && Current.rain['1hr']}</p> */}</div>

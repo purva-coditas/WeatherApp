@@ -8,9 +8,10 @@
     height: 150px;
     width: 70px;
     background-color: rgba(255, 255, 255, 0.2);
-    margin: 5px 5px 35px 5px;
+    margin: 5px 5px 35px 0px;
     border-radius: 45px;
     padding: 10px;
+    margin-right: 0%;
   }
 }
 
@@ -20,11 +21,32 @@
 
 .golden {
   height: 170px;
-  width: 80px;
+  width: 70px;
   top: 183px;
   right: 565px;
   background-color: rgba(255, 255, 255, 0.2);
   margin: 20px;
   border-radius: 45px;
-  padding: 10px;
+  padding: 15px;
+}
+
+.react-clock__face {
+  border: none !important;
+}
+
+time {
+  width: 70px !important;
+  height: 70px !important;
+}
+
+.react-clock__second-hand__body {
+  background-color: blue !important;
+}
+
+.react-clock__minute-hand__body {
+  background-color: #524f52 !important;
+}
+
+.react-clock__hour-hand__body {
+  background-color: #e1d4e3 !important;
 }
