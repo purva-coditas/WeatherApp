@@ -1,11 +1,11 @@
-import axios from "axios";
-import React, { useState, useEffect } from "react";
-import AirQuality from "./AirQuality";
-import { formatOrdinals, WeekdaysFull } from "./DateFormattor";
-import OneCallDaily from "./OneCallDaily";
-import SunTime from "./SunTime";
-import { WeatherProps } from "./WeatherProps";
-import { FontAwesomeIcon } from "@fortawesome/react-fontawesome";
+import axios from 'axios';
+import React, { useState, useEffect } from 'react';
+import AirQuality from './AirQuality';
+import { formatOrdinals, WeekdaysFull } from './DateFormattor';
+import OneCallDaily from './OneCallDaily';
+import SunTime from './SunTime';
+import { WeatherProps } from './WeatherProps';
+import { FontAwesomeIcon } from '@fortawesome/react-fontawesome';
 // import { infoIcon } from "../../public/assests/i";
 import {
   faLocationArrow,
@@ -15,13 +15,13 @@ import {
   faLocationDot,
   faMagnifyingGlass,
   faInfo,
-} from "@fortawesome/free-solid-svg-icons";
-import Switch from "./Switch";
+} from '@fortawesome/free-solid-svg-icons';
+import Switch from './Switch';
 
 const GrabData: React.FC = () => {
   const [searchbarDisplay, setSearchDisplay] = useState(false);
   const [current, setCurrent] = useState(false);
-  const [query, setQuery] = useState("");
+  const [query, setQuery] = useState('');
   const [toggled, setToggled] = useState(false);
   const [uvi, setUvi] = useState(0);
   const [weather, setWeather] = useState<WeatherProps>();
@@ -35,14 +35,14 @@ const GrabData: React.FC = () => {
             `https://api.openweathermap.org/data/2.5/weather?lat=${position.coords.latitude}&lon=${position.coords.longitude}&appid=${process.env.key}&units=metric`
           )
           .then((currentLocation) => {
-            console.log("here", currentLocation.data);
+            console.log('here', currentLocation.data);
             setCurrent(true);
             setWeather(currentLocation.data);
           });
       },
 
       function (error) {
-        console.error("Error Code = " + error.code + " - " + error.message);
+        console.error('Error Code = ' + error.code + ' - ' + error.message);
       }
     );
   }, []);
@@ -59,14 +59,14 @@ const GrabData: React.FC = () => {
       .then((result) => {
         setCurrent(false);
         setWeather(result.data);
-        console.log("2nd", result.data);
+        console.log('2nd', result.data);
       });
   };
 
   const handleSearch = () => {
     setSearchDisplay(!searchbarDisplay);
     getData(query);
-    setQuery("");
+    setQuery('');
   };
 
   function call_uvi(data: number) {
@@ -78,7 +78,7 @@ const GrabData: React.FC = () => {
       <div className="left-side">
         {weather && (
           <div>
-            <div style={{ display: "flex", justifyContent: "space-between" }}>
+            <div style={{ display: 'flex', justifyContent: 'space-between' }}>
               <img
                 src={`http://openweathermap.org/img/wn/${weather.weather[0].icon}.png`}
                 alt="Weather Icon"
@@ -99,7 +99,7 @@ const GrabData: React.FC = () => {
 
             {toggled && (
               <p className="temp">
-                {Math.round(weather.main.temp)}{" "}
+                {Math.round(weather.main.temp)}{' '}
                 <sup className="celcius">&#176;C</sup>
               </p>
             )}
@@ -111,13 +111,13 @@ const GrabData: React.FC = () => {
             )}
 
             <p className="current-date">
-              {formatOrdinals(new Date(weather.dt * 1000).getDate())}{" "}
-              {new Date(weather.dt * 1000).toLocaleDateString("en-GB", {
-                month: "short",
-              })}{" "}
+              {formatOrdinals(new Date(weather.dt * 1000).getDate())}{' '}
+              {new Date(weather.dt * 1000).toLocaleDateString('en-GB', {
+                month: 'short',
+              })}{' '}
               &apos;
-              {new Date(weather.dt * 1000).toLocaleDateString("en-GB", {
-                year: "2-digit",
+              {new Date(weather.dt * 1000).toLocaleDateString('en-GB', {
+                year: '2-digit',
               })}
             </p>
             <p className="day-time">
@@ -126,9 +126,9 @@ const GrabData: React.FC = () => {
               </span>
 
               <span className="time">
-                {new Date(weather.dt * 1000).toLocaleTimeString("en-US", {
-                  hour: "2-digit",
-                  minute: "2-digit",
+                {new Date(weather.dt * 1000).toLocaleTimeString('en-US', {
+                  hour: '2-digit',
+                  minute: '2-digit',
                 })}
               </span>
             </p>
@@ -173,7 +173,7 @@ const GrabData: React.FC = () => {
               type="text"
               onChange={(e) => setQuery(e.target.value)}
               onKeyPress={(e) => {
-                if (e.key === "Enter") {
+                if (e.key === 'Enter') {
                   handleSearch();
                 }
               }}
@@ -195,22 +195,16 @@ const GrabData: React.FC = () => {
         </div>
 
         <>{weather && <SunTime rise={rise} set={set} />}</>
-        <div style={{ display: "flex" }}>
+        <div style={{ display: 'flex', alignItems: 'center' }}>
           <div className="infoDash"></div>
 
-          <div
-            className="info"
-            style={{
-              padding: "4px 12px 8px 12px",
-              borderRadius: "50%",
-              backgroundColor: "rgba(255, 255, 255, 0.2)",
-            }}
-          >
-            <FontAwesomeIcon
+          <div className="info">
+            {/* <FontAwesomeIcon
               icon={faInfo}
               size="sm"
-              style={{ verticalAlign: "middle" }}
-            />
+              style={{ verticalAlign: 'middle' }}
+            /> */}
+            <em>i</em>
           </div>
         </div>
 

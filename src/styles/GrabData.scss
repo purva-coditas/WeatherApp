@@ -122,6 +122,13 @@
   }
 }
 
+.info {
+  padding: 4px 12px;
+  border-radius: 50%;
+  background-color: rgba(255, 255, 255, 0.2);
+  margin: 0 10px 10px;
+}
+
 .infoDash {
   border-bottom: 1px solid white;
   width: 300px;
@@ -135,7 +142,7 @@
   .right-side {
     width: 40%;
     padding: 40px 115px;
-    justify-content: "center";
+    justify-content: 'center';
   }
 
   .infoDash {
