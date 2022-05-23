@@ -3,6 +3,7 @@
   width: 1000px;
   display: flex;
   text-align: left;
+  margin: 0 auto;
 }
 
 .left-side {
@@ -121,11 +122,24 @@
   }
 }
 
+.infoDash {
+  border-bottom: 1px solid white;
+  width: 300px;
+}
+
 @media screen and (max-width: 900px) {
   .main-div {
     display: block;
+    margin: auto;
   }
   .right-side {
-    width: 55%;
+    width: 40%;
+    padding: 40px 115px;
+    justify-content: "center";
+  }
+
+  .infoDash {
+    border-bottom: 1px solid white;
+    width: 270px;
   }
 }

@@ -196,11 +196,10 @@ const GrabData: React.FC = () => {
 
         <>{weather && <SunTime rise={rise} set={set} />}</>
         <div style={{ display: "flex" }}>
-          <div
-            style={{ borderBottom: "1px solid white", width: "270px" }}
-          ></div>
+          <div className="infoDash"></div>
 
           <div
+            className="info"
             style={{
               padding: "4px 12px 8px 12px",
               borderRadius: "50%",
